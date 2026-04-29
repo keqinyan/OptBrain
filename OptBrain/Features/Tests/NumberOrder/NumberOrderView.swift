@@ -3,6 +3,7 @@ import SwiftUI
 struct NumberOrderView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.palette) private var palette
     @State private var vm = NumberOrderViewModel(gridSize: 4)
     @State private var selectedSize: Int = 4
 
@@ -26,7 +27,7 @@ struct NumberOrderView: View {
             Spacer(minLength: 24)
             Image(systemName: "square.grid.3x3.fill")
                 .font(.system(size: 56, weight: .light))
-                .foregroundStyle(Theme.accent)
+                .foregroundStyle(palette.accent)
             Text("test.numberOrder.instructions")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
@@ -95,7 +96,7 @@ struct NumberOrderView: View {
                         .frame(maxWidth: .infinity)
                         .aspectRatio(1, contentMode: .fit)
                         .background(vm.tappedIndices.contains(index)
-                                   ? Theme.accent.opacity(0.25)
+                                   ? palette.accent.opacity(0.25)
                                    : Theme.surface)
                         .foregroundStyle(vm.tappedIndices.contains(index)
                                          ? Theme.onSurfaceMuted

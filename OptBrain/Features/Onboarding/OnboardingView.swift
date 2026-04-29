@@ -2,6 +2,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     @AppStorage("hasOnboarded") private var hasOnboarded = false
+    @Environment(\.palette) private var palette
     @State private var page = 0
 
     private let pages: [OnboardingPage] = [
@@ -57,7 +58,7 @@ struct OnboardingView: View {
             Spacer(minLength: 32)
             Image(systemName: page.symbol)
                 .font(.system(size: 72, weight: .light))
-                .foregroundStyle(Theme.accent)
+                .foregroundStyle(palette.accent)
             Text(LocalizedStringKey(page.titleKey))
                 .font(.optDashboardTitle)
                 .multilineTextAlignment(.center)

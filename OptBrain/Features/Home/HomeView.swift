@@ -3,6 +3,7 @@ import SwiftData
 
 struct HomeView: View {
     @Environment(\.modelContext) private var context
+    @Environment(\.palette) private var palette
     @Query(sort: \Session.startTime, order: .reverse) private var sessions: [Session]
 
     var body: some View {
@@ -80,7 +81,7 @@ struct HomeView: View {
         let meanAcc = AnalyticsService.mean(of: sessions.compactMap { $0.accuracy })
         HStack(spacing: 10) {
             Image(systemName: type.symbol)
-                .foregroundStyle(Theme.accent)
+                .foregroundStyle(palette.accent)
                 .frame(width: 24)
             Text(LocalizedStringKey(type.displayKey))
                 .font(.subheadline.weight(.semibold))
@@ -161,7 +162,7 @@ struct HomeView: View {
                         HStack(spacing: 12) {
                             Image(systemName: type.symbol)
                                 .font(.title2)
-                                .foregroundStyle(Theme.accent)
+                                .foregroundStyle(palette.accent)
                                 .frame(width: 32)
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(LocalizedStringKey(type.displayKey))

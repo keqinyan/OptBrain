@@ -3,6 +3,7 @@ import SwiftData
 import Charts
 
 struct InsightsView: View {
+    @Environment(\.palette) private var palette
     @Query(sort: \Session.startTime, order: .reverse) private var sessions: [Session]
     @State private var chartTestType: TestType = .reactionTime
     @State private var chartMetric: ChartMetric = .speed
@@ -65,7 +66,7 @@ struct InsightsView: View {
         let cv = AnalyticsService.mean(of: sessions.compactMap { $0.stabilityCV })
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
-                Image(systemName: type.symbol).foregroundStyle(Theme.accent)
+                Image(systemName: type.symbol).foregroundStyle(palette.accent)
                 Text(LocalizedStringKey(type.displayKey))
                     .font(.subheadline.weight(.semibold))
                 Spacer()
@@ -207,7 +208,7 @@ struct InsightsView: View {
                     y: .value(NSLocalizedString(chartMetric.labelKey, comment: ""), v)
                 )
                 .interpolationMethod(.catmullRom)
-                .foregroundStyle(isPreview ? Theme.onSurfaceMuted.opacity(0.5) : Theme.accent)
+                .foregroundStyle(isPreview ? Theme.onSurfaceMuted.opacity(0.5) : palette.accent)
                 .lineStyle(StrokeStyle(lineWidth: isPreview ? 1.5 : 2.5,
                                        dash: isPreview ? [4, 4] : []))
 
@@ -215,7 +216,7 @@ struct InsightsView: View {
                     x: .value("Day", point.date, unit: .day),
                     y: .value("v", v)
                 )
-                .foregroundStyle(isPreview ? Theme.onSurfaceMuted.opacity(0.5) : Theme.accent)
+                .foregroundStyle(isPreview ? Theme.onSurfaceMuted.opacity(0.5) : palette.accent)
                 .symbolSize(isPreview ? 30 : 60)
             }
         }

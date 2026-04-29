@@ -108,6 +108,11 @@
 "settings.title" = "Settings";
 "settings.language" = "Language";
 "settings.language.system" = "System";
+"settings.theme" = "Theme";
+"theme.teal" = "Lab Teal";
+"theme.indigo" = "Deep Indigo";
+"theme.amber" = "Warm Amber";
+"theme.graphite" = "Graphite";
 "settings.data" = "Data";
 "settings.export.csv" = "Export as CSV";
 "settings.export.json" = "Export as JSON";
