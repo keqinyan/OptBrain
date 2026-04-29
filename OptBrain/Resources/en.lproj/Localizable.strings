@@ -87,6 +87,10 @@
 "insights.section.title" = "What your data suggests";
 "insights.byTOD.title" = "By time of day";
 "insights.byTOD.empty" = "Complete a few more sessions to see patterns.";
+"insights.trend.title" = "7-day trend";
+"insights.trend.preview" = "PREVIEW";
+"insights.trend.body" = "Daily mean for the selected test and metric over the last 7 days.";
+"insights.trend.previewBody" = "Once you have a few sessions, your real data will appear here. The dashed line is a placeholder to show the chart's shape.";
 
 "insights.notEnoughData.title" = "Not enough data yet";
 "insights.notEnoughData.body" = "Complete at least %@ sessions to unlock personalised observations.";

@@ -87,6 +87,10 @@
 "insights.section.title" = "你的数据显示";
 "insights.byTOD.title" = "按时段";
 "insights.byTOD.empty" = "再完成几次测试,就能看到时段差异。";
+"insights.trend.title" = "近 7 日趋势";
+"insights.trend.preview" = "示意";
+"insights.trend.body" = "所选测试和指标在最近 7 天的每日均值。";
+"insights.trend.previewBody" = "等你完成几次测试后,这里会显示真实数据。虚线只是占位,展示图表的样式。";
 
 "insights.notEnoughData.title" = "数据还不够";
 "insights.notEnoughData.body" = "至少完成 %@ 次测试,才能解锁个性化观察。";
