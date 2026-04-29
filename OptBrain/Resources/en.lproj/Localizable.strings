@@ -33,6 +33,11 @@
 "home.streak.title" = "Streak";
 "home.streak.subtitle" = "Consecutive days";
 "home.tests.title" = "Quick start";
+"home.stat.today" = "Today";
+"home.stat.week" = "This week";
+"home.stat.streak" = "Streak";
+"home.recent.title" = "Recent sessions";
+"home.recent.yesterday" = "Yesterday";
 
 /* Tests */
 "test.reactionTime.title" = "Reaction Time";
@@ -55,6 +60,12 @@
 "test.numberOrder.start" = "Start";
 "test.numberOrder.next" = "Next:";
 "test.numberOrder.gridSize" = "Grid size";
+
+"test.memoryMatch.title" = "Memory Match";
+"test.memoryMatch.subtitle" = "Flip pairs and remember.";
+"test.memoryMatch.instructions" = "Flip cards two at a time and find every matching pair. We track time, pair attempts, and mistakes.";
+"test.memoryMatch.start" = "Start";
+"test.memoryMatch.matches" = "Matches";
 
 "test.finished.title" = "Session complete";
 "test.finished.save" = "Save session";

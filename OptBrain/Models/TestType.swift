@@ -4,6 +4,7 @@ enum TestType: String, Codable, CaseIterable, Identifiable {
     case reactionTime
     case stroop
     case numberOrder
+    case memoryMatch
 
     var id: String { rawValue }
 
@@ -12,6 +13,7 @@ enum TestType: String, Codable, CaseIterable, Identifiable {
         case .reactionTime: return "test.reactionTime.title"
         case .stroop:       return "test.stroop.title"
         case .numberOrder:  return "test.numberOrder.title"
+        case .memoryMatch:  return "test.memoryMatch.title"
         }
     }
 
@@ -20,6 +22,7 @@ enum TestType: String, Codable, CaseIterable, Identifiable {
         case .reactionTime: return "test.reactionTime.subtitle"
         case .stroop:       return "test.stroop.subtitle"
         case .numberOrder:  return "test.numberOrder.subtitle"
+        case .memoryMatch:  return "test.memoryMatch.subtitle"
         }
     }
 
@@ -28,6 +31,7 @@ enum TestType: String, Codable, CaseIterable, Identifiable {
         case .reactionTime: return "bolt.fill"
         case .stroop:       return "paintpalette.fill"
         case .numberOrder:  return "square.grid.3x3.fill"
+        case .memoryMatch:  return "rectangle.on.rectangle.angled"
         }
     }
 }

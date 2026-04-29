@@ -9,30 +9,23 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    header
-                    todaySnapshot
-                    streakCard
-                    quickStart
+                VStack(spacing: 20) {
+                    statsBar
+                    testGrid
+                    if !sessions.isEmpty {
+                        recentSessionsCard
+                    }
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.top, 8)
+                .padding(.bottom, 24)
             }
-            .navigationTitle("home.title")
+            .navigationTitle(greetingTitle)
             .background(Color(.systemBackground))
         }
     }
 
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(greetingKey)
-                .font(.optDashboardTitle)
-            Text("home.subtitle")
-                .foregroundStyle(Theme.onSurfaceMuted)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private var greetingKey: LocalizedStringKey {
+    private var greetingTitle: LocalizedStringKey {
         switch TimeOfDay.bucket(for: .now) {
         case .morning:   return "home.greeting.morning"
         case .afternoon: return "home.greeting.afternoon"
@@ -41,96 +34,138 @@ struct HomeView: View {
         }
     }
 
-    private var todaysSessions: [Session] {
-        let cal = Calendar.current
-        return sessions.filter { cal.isDateInToday($0.startTime) }
+    // MARK: - Slim stats bar
+
+    private var statsBar: some View {
+        HStack(spacing: 0) {
+            statPill(value: "\(sessions.filter { Calendar.current.isDateInToday($0.startTime) }.count)",
+                     labelKey: "home.stat.today")
+            divider
+            statPill(value: "\(sessionsThisWeek)", labelKey: "home.stat.week")
+            divider
+            statPill(value: "\(currentStreak)", labelKey: "home.stat.streak")
+        }
+        .padding(.vertical, 12)
+        .background(Theme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.cornerRadius, style: .continuous))
     }
 
-    private var todaySnapshot: some View {
-        let today = todaysSessions
-        return Card {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    Text("home.today.title").font(.headline)
-                    Spacer()
-                    Text("metric.sessions").font(.caption).foregroundStyle(Theme.onSurfaceMuted)
-                    Text("\(today.count)").font(.subheadline.bold()).monospacedDigit()
+    private func statPill(value: String, labelKey: String) -> some View {
+        VStack(spacing: 2) {
+            Text(value)
+                .font(.title2.weight(.semibold).monospacedDigit())
+                .foregroundStyle(Theme.onSurface)
+            Text(LocalizedStringKey(labelKey))
+                .font(.caption2)
+                .foregroundStyle(Theme.onSurfaceMuted)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private var divider: some View {
+        Rectangle().fill(Theme.divider).frame(width: 1, height: 28)
+    }
+
+    // MARK: - Test grid (2x2)
+
+    private var testGrid: some View {
+        let columns = [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)]
+        return LazyVGrid(columns: columns, spacing: 12) {
+            ForEach(TestType.allCases) { type in
+                NavigationLink {
+                    destination(for: type)
+                } label: {
+                    testCard(for: type)
                 }
-                if today.isEmpty {
-                    Text("home.today.empty")
-                        .foregroundStyle(Theme.onSurfaceMuted)
-                } else {
-                    // Per-test rows: each test compares only with itself.
-                    ForEach(TestType.allCases) { type in
-                        let typeSessions = today.filter { $0.testType == type }
-                        if !typeSessions.isEmpty {
-                            todayRow(type: type, sessions: typeSessions)
-                            if type != TestType.allCases.last {
-                                Divider()
-                            }
-                        }
-                    }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func testCard(for type: TestType) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Image(systemName: type.symbol)
+                .font(.system(size: 28, weight: .semibold))
+                .foregroundStyle(palette.accent)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(LocalizedStringKey(type.displayKey))
+                    .font(.headline)
+                    .foregroundStyle(Theme.onSurface)
+                Text(LocalizedStringKey(type.subtitleKey))
+                    .font(.caption)
+                    .foregroundStyle(Theme.onSurfaceMuted)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, minHeight: 140, alignment: .topLeading)
+        .background(Theme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.cornerRadius, style: .continuous))
+    }
+
+    // MARK: - Recent sessions (with precise time)
+
+    private var recentSessionsCard: some View {
+        let recent = Array(sessions.prefix(5))
+        return Card {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("home.recent.title").font(.headline)
+                ForEach(recent, id: \.sessionId) { session in
+                    sessionRow(session)
+                    if session.sessionId != recent.last?.sessionId { Divider() }
                 }
             }
         }
     }
 
     @ViewBuilder
-    private func todayRow(type: TestType, sessions: [Session]) -> some View {
-        let meanRT = AnalyticsService.mean(of: sessions.compactMap { $0.meanResponseTimeMs })
-        let meanAcc = AnalyticsService.mean(of: sessions.compactMap { $0.accuracy })
+    private func sessionRow(_ session: Session) -> some View {
         HStack(spacing: 10) {
-            Image(systemName: type.symbol)
+            Image(systemName: session.testType.symbol)
                 .foregroundStyle(palette.accent)
-                .frame(width: 24)
-            Text(LocalizedStringKey(type.displayKey))
-                .font(.subheadline.weight(.semibold))
+                .frame(width: 22)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(LocalizedStringKey(session.testType.displayKey))
+                    .font(.subheadline.weight(.semibold))
+                Text(preciseTime(for: session.startTime))
+                    .font(.caption)
+                    .foregroundStyle(Theme.onSurfaceMuted)
+                    .monospacedDigit()
+            }
             Spacer()
-            if let rt = meanRT {
-                Label(String(format: "%.0f ms", rt), systemImage: "bolt.fill")
-                    .labelStyle(.titleAndIcon)
+            if let rt = session.meanResponseTimeMs {
+                Text(String(format: "%.0f ms", rt))
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(Theme.onSurfaceMuted)
+            } else if let c = session.completionTimeMs {
+                Text(String(format: "%.1f s", c / 1000))
                     .font(.caption.monospacedDigit())
                     .foregroundStyle(Theme.onSurfaceMuted)
             }
-            if let acc = meanAcc {
-                Label(String(format: "%.0f%%", acc * 100), systemImage: "target")
-                    .labelStyle(.titleAndIcon)
-                    .font(.caption.monospacedDigit())
-                    .foregroundStyle(Theme.onSurfaceMuted)
-            }
-            Text("×\(sessions.count)")
-                .font(.caption.bold().monospacedDigit())
-                .foregroundStyle(Theme.onSurface)
         }
     }
 
-    private var streakCard: some View {
-        let count = sessionsThisWeek
-        let streak = currentStreak
-        return Card {
-            HStack(spacing: 16) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("home.week.title").font(.headline)
-                    Text("\(count)")
-                        .font(.optMetricValue)
-                        .monospacedDigit()
-                    Text("home.week.subtitle")
-                        .font(.caption)
-                        .foregroundStyle(Theme.onSurfaceMuted)
-                }
-                Spacer()
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("home.streak.title").font(.headline)
-                    Text("\(streak)")
-                        .font(.optMetricValue)
-                        .monospacedDigit()
-                    Text("home.streak.subtitle")
-                        .font(.caption)
-                        .foregroundStyle(Theme.onSurfaceMuted)
-                }
-            }
+    private func preciseTime(for date: Date) -> String {
+        let cal = Calendar.current
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        if cal.isDateInToday(date) {
+            formatter.dateFormat = "h:mm a"
+            return formatter.string(from: date)
+        } else if cal.isDateInYesterday(date) {
+            formatter.dateFormat = "h:mm a"
+            return NSLocalizedString("home.recent.yesterday", comment: "") + " · " + formatter.string(from: date)
+        } else {
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            return formatter.string(from: date)
         }
     }
+
+    // MARK: - Streak / weekly counts
 
     private var sessionsThisWeek: Int {
         let cal = Calendar.current
@@ -151,40 +186,7 @@ struct HomeView: View {
         return streak
     }
 
-    private var quickStart: some View {
-        Card {
-            VStack(alignment: .leading, spacing: 12) {
-                Text("home.tests.title").font(.headline)
-                ForEach(TestType.allCases) { type in
-                    NavigationLink {
-                        destination(for: type)
-                    } label: {
-                        HStack(spacing: 12) {
-                            Image(systemName: type.symbol)
-                                .font(.title2)
-                                .foregroundStyle(palette.accent)
-                                .frame(width: 32)
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(LocalizedStringKey(type.displayKey))
-                                    .font(.body.weight(.semibold))
-                                    .foregroundStyle(Theme.onSurface)
-                                Text(LocalizedStringKey(type.subtitleKey))
-                                    .font(.caption)
-                                    .foregroundStyle(Theme.onSurfaceMuted)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(Theme.onSurfaceMuted)
-                        }
-                        .padding(.vertical, 8)
-                    }
-                    if type != TestType.allCases.last {
-                        Divider()
-                    }
-                }
-            }
-        }
-    }
+    // MARK: - Routing
 
     @ViewBuilder
     private func destination(for type: TestType) -> some View {
@@ -192,6 +194,7 @@ struct HomeView: View {
         case .reactionTime: ReactionTimeView()
         case .stroop:       StroopView()
         case .numberOrder:  NumberOrderView()
+        case .memoryMatch:  MemoryMatchView()
         }
     }
 }

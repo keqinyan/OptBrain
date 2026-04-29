@@ -33,6 +33,11 @@
 "home.streak.title" = "连续";
 "home.streak.subtitle" = "连续天数";
 "home.tests.title" = "快速开始";
+"home.stat.today" = "今天";
+"home.stat.week" = "本周";
+"home.stat.streak" = "连续";
+"home.recent.title" = "最近记录";
+"home.recent.yesterday" = "昨天";
 
 /* Tests */
 "test.reactionTime.title" = "反应时间";
@@ -55,6 +60,12 @@
 "test.numberOrder.start" = "开始";
 "test.numberOrder.next" = "下一个:";
 "test.numberOrder.gridSize" = "网格尺寸";
+
+"test.memoryMatch.title" = "记忆翻牌";
+"test.memoryMatch.subtitle" = "翻牌找对子,记住位置。";
+"test.memoryMatch.instructions" = "每次翻开两张牌,找到所有相同图案的对子。我们会记录用时、尝试次数和错误数。";
+"test.memoryMatch.start" = "开始";
+"test.memoryMatch.matches" = "已配对";
 
 "test.finished.title" = "测试完成";
 "test.finished.save" = "保存本次记录";
