@@ -7,6 +7,23 @@ struct OptBrainApp: App {
     @AppStorage("appLanguage") private var appLanguage: String = "system"
     @AppStorage("themePalette") private var paletteRaw: String = ThemePalette.teal.rawValue
 
+    init() {
+        // SwiftUI's `LocalizedStringKey` resolves via `Bundle.main.preferredLocalizations`,
+        // which is decided at launch — `\.locale` alone won't switch the bundle. Setting
+        // `AppleLanguages` here makes the in-app language picker actually pick the
+        // correct .lproj on next launch.
+        Self.applyAppleLanguagesOverride()
+    }
+
+    private static func applyAppleLanguagesOverride() {
+        let pref = UserDefaults.standard.string(forKey: "appLanguage") ?? "system"
+        if pref == "system" {
+            UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+        } else {
+            UserDefaults.standard.set([pref], forKey: "AppleLanguages")
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             Group {

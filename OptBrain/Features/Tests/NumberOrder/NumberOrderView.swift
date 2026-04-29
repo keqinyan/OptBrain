@@ -80,33 +80,48 @@ struct NumberOrderView: View {
     }
 
     private var grid: some View {
-        let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: vm.gridSize)
+        let columns = Array(repeating: GridItem(.flexible(), spacing: 10), count: vm.gridSize)
         // Tighter font for larger grids so 2-digit numbers fit cleanly.
         let baseFont: Font.TextStyle = vm.gridSize >= 5 ? .title3 : .title2
-        return LazyVGrid(columns: columns, spacing: 8) {
+        return LazyVGrid(columns: columns, spacing: 10) {
             ForEach(Array(vm.numbers.enumerated()), id: \.offset) { index, value in
                 Button {
                     vm.tap(at: index)
                 } label: {
-                    Text("\(value)")
-                        .font(.system(baseFont, design: .rounded, weight: .semibold))
-                        .monospacedDigit()
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.4)
-                        .padding(4)
-                        .frame(maxWidth: .infinity)
-                        .aspectRatio(1, contentMode: .fit)
-                        .background(vm.tappedIndices.contains(index)
-                                   ? palette.accent.opacity(0.25)
-                                   : Theme.surface)
-                        .foregroundStyle(vm.tappedIndices.contains(index)
-                                         ? Theme.onSurfaceMuted
-                                         : Theme.onSurface)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                    cell(value: value, isTapped: vm.tappedIndices.contains(index), baseFont: baseFont)
                 }
                 .disabled(vm.tappedIndices.contains(index))
+                .buttonStyle(.plain)
             }
         }
+    }
+
+    @ViewBuilder
+    private func cell(value: Int, isTapped: Bool, baseFont: Font.TextStyle) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Theme.surface)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .strokeBorder(isTapped ? palette.accent.opacity(0.5) : Theme.divider.opacity(0.4),
+                                      lineWidth: 1)
+                )
+            if isTapped {
+                Image(systemName: "checkmark")
+                    .font(.system(.title3, design: .rounded, weight: .bold))
+                    .foregroundStyle(palette.accent)
+            } else {
+                Text("\(value)")
+                    .font(.system(baseFont, design: .rounded, weight: .semibold))
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.4)
+                    .foregroundStyle(Theme.onSurface)
+                    .padding(4)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .aspectRatio(1, contentMode: .fit)
     }
 
     private func finishedView(summary: AnalyticsService.Summary, completion: Double) -> some View {
