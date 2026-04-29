@@ -99,6 +99,11 @@
 "insights.section.title" = "What your data suggests";
 "insights.byTOD.title" = "By time of day";
 "insights.byTOD.empty" = "Complete a few more sessions to see patterns.";
+
+"glossary.title" = "What do these mean?";
+"glossary.speed.body" = "Average reaction or completion time, in milliseconds. Lower is faster.";
+"glossary.accuracy.body" = "Percent of trials answered correctly. 100% means no errors.";
+"glossary.stability.body" = "How consistent your response times are within a session — coefficient of variation (standard deviation ÷ mean). Lower means steadier; higher means more scattered.";
 "insights.trend.title" = "7-day trend";
 "insights.trend.preview" = "PREVIEW";
 "insights.trend.body" = "Daily mean for the selected test and metric over the last 7 days.";
