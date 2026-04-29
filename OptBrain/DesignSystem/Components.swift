@@ -13,6 +13,7 @@ struct Card<Content: View>: View {
 }
 
 struct MetricTile: View {
+    @Environment(\.palette) private var palette
     let labelKey: String
     let value: String
     let symbol: String?
@@ -26,7 +27,7 @@ struct MetricTile: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
-                if let symbol { Image(systemName: symbol).foregroundStyle(Theme.accent) }
+                if let symbol { Image(systemName: symbol).foregroundStyle(palette.accent) }
                 Text(LocalizedStringKey(labelKey))
                     .font(.optMetricLabel)
                     .foregroundStyle(Theme.onSurfaceMuted)
@@ -44,12 +45,13 @@ struct MetricTile: View {
 }
 
 struct PrimaryButtonStyle: ButtonStyle {
+    @Environment(\.palette) private var palette
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.system(.body, design: .rounded, weight: .semibold))
             .padding(.vertical, 14)
             .frame(maxWidth: .infinity)
-            .background(Theme.accent.opacity(configuration.isPressed ? 0.7 : 1))
+            .background(palette.accent.opacity(configuration.isPressed ? 0.7 : 1))
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: Theme.cornerRadius, style: .continuous))
     }

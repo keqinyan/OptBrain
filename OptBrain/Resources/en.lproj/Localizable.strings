@@ -33,6 +33,11 @@
 "home.streak.title" = "Streak";
 "home.streak.subtitle" = "Consecutive days";
 "home.tests.title" = "Quick start";
+"home.stat.today" = "Today";
+"home.stat.week" = "This week";
+"home.stat.streak" = "Streak";
+"home.recent.title" = "Recent sessions";
+"home.recent.yesterday" = "Yesterday";
 
 /* Tests */
 "test.reactionTime.title" = "Reaction Time";
@@ -54,6 +59,13 @@
 "test.numberOrder.instructions" = "Numbers are shuffled across a grid. Tap them in order from 1 upward as fast as you can.";
 "test.numberOrder.start" = "Start";
 "test.numberOrder.next" = "Next:";
+"test.numberOrder.gridSize" = "Grid size";
+
+"test.memoryMatch.title" = "Memory Match";
+"test.memoryMatch.subtitle" = "Flip pairs and remember.";
+"test.memoryMatch.instructions" = "Flip cards two at a time and find every matching pair. We track time, pair attempts, and mistakes.";
+"test.memoryMatch.start" = "Start";
+"test.memoryMatch.matches" = "Matches";
 
 "test.finished.title" = "Session complete";
 "test.finished.save" = "Save session";
@@ -81,10 +93,15 @@
 /* Insights */
 "insights.title" = "Insights";
 "insights.overview.title" = "Overall";
-"insights.overview.note" = "Averaged across all completed sessions.";
+"insights.overview.note" = "Averaged within each test only — speed and accuracy aren't compared across different tests.";
+"insights.overview.empty" = "Complete a session to see your stats here.";
 "insights.section.title" = "What your data suggests";
 "insights.byTOD.title" = "By time of day";
 "insights.byTOD.empty" = "Complete a few more sessions to see patterns.";
+"insights.trend.title" = "7-day trend";
+"insights.trend.preview" = "PREVIEW";
+"insights.trend.body" = "Daily mean for the selected test and metric over the last 7 days.";
+"insights.trend.previewBody" = "Once you have a few sessions, your real data will appear here. The dashed line is a placeholder to show the chart's shape.";
 
 "insights.notEnoughData.title" = "Not enough data yet";
 "insights.notEnoughData.body" = "Complete at least %@ sessions to unlock personalised observations.";
@@ -102,6 +119,11 @@
 "settings.title" = "Settings";
 "settings.language" = "Language";
 "settings.language.system" = "System";
+"settings.theme" = "Theme";
+"theme.teal" = "Lab Teal";
+"theme.indigo" = "Deep Indigo";
+"theme.amber" = "Warm Amber";
+"theme.graphite" = "Graphite";
 "settings.data" = "Data";
 "settings.export.csv" = "Export as CSV";
 "settings.export.json" = "Export as JSON";

@@ -3,7 +3,9 @@ import SwiftUI
 struct NumberOrderView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.palette) private var palette
     @State private var vm = NumberOrderViewModel(gridSize: 4)
+    @State private var selectedSize: Int = 4
 
     var body: some View {
         VStack(spacing: 16) {
@@ -11,46 +13,44 @@ struct NumberOrderView: View {
             case .idle: idleView
             case .running: runningView
             case .finished(let summary, let completion):
-                VStack(spacing: 12) {
-                    MetricTile(
-                        labelKey: "metric.completion",
-                        value: String(format: "%.1f s", completion / 1000),
-                        symbol: "clock.fill")
-                    MetricTile(
-                        labelKey: "metric.mistakes",
-                        value: "\(summary.mistakeCount)",
-                        symbol: "xmark.octagon.fill")
-                    MetricTile(
-                        labelKey: "metric.stability",
-                        value: summary.stabilityCV.map { String(format: "%.2f", $0) } ?? "—",
-                        symbol: "waveform.path.ecg")
-                    Button("test.finished.save") {
-                        vm.persist(in: context)
-                        dismiss()
-                    }
-                    .buttonStyle(PrimaryButtonStyle())
-                    .padding(.top)
-                }
-                .padding()
+                finishedView(summary: summary, completion: completion)
             }
         }
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .navigationTitle("test.numberOrder.title")
         .navigationBarTitleDisplayMode(.inline)
     }
 
     private var idleView: some View {
-        VStack(spacing: 16) {
-            Spacer()
+        VStack(spacing: 20) {
+            Spacer(minLength: 24)
             Image(systemName: "square.grid.3x3.fill")
                 .font(.system(size: 56, weight: .light))
-                .foregroundStyle(Theme.accent)
+                .foregroundStyle(palette.accent)
             Text("test.numberOrder.instructions")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("test.numberOrder.gridSize")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(Theme.onSurfaceMuted)
+                Picker("test.numberOrder.gridSize", selection: $selectedSize) {
+                    Text("3 × 3").tag(3)
+                    Text("4 × 4").tag(4)
+                    Text("5 × 5").tag(5)
+                }
+                .pickerStyle(.segmented)
+            }
+            .padding(.horizontal, 24)
+
             Spacer()
-            Button("test.numberOrder.start") { vm.begin() }
-                .buttonStyle(PrimaryButtonStyle())
+            Button("test.numberOrder.start") {
+                vm.setGridSize(selectedSize)
+                vm.begin()
+            }
+            .buttonStyle(PrimaryButtonStyle())
         }
     }
 
@@ -72,28 +72,66 @@ struct NumberOrderView: View {
                     .monospacedDigit()
             }
 
-            let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: vm.gridSize)
-            LazyVGrid(columns: columns, spacing: 8) {
-                ForEach(Array(vm.numbers.enumerated()), id: \.offset) { index, value in
-                    Button {
-                        vm.tap(at: index)
-                    } label: {
-                        Text("\(value)")
-                            .font(.system(.title2, design: .rounded, weight: .semibold))
-                            .monospacedDigit()
-                            .frame(maxWidth: .infinity)
-                            .aspectRatio(1, contentMode: .fit)
-                            .background(vm.tappedIndices.contains(index)
-                                       ? Theme.accent.opacity(0.25)
-                                       : Theme.surface)
-                            .foregroundStyle(vm.tappedIndices.contains(index)
-                                             ? Theme.onSurfaceMuted
-                                             : Theme.onSurface)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    .disabled(vm.tappedIndices.contains(index))
+            grid
+
+            Spacer()
+        }
+    }
+
+    private var grid: some View {
+        let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: vm.gridSize)
+        // Tighter font for larger grids so 2-digit numbers fit cleanly.
+        let baseFont: Font = vm.gridSize >= 5 ? .title3 : .title2
+        return LazyVGrid(columns: columns, spacing: 8) {
+            ForEach(Array(vm.numbers.enumerated()), id: \.offset) { index, value in
+                Button {
+                    vm.tap(at: index)
+                } label: {
+                    Text("\(value)")
+                        .font(.system(baseFont, design: .rounded, weight: .semibold))
+                        .monospacedDigit()
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.4)
+                        .padding(4)
+                        .frame(maxWidth: .infinity)
+                        .aspectRatio(1, contentMode: .fit)
+                        .background(vm.tappedIndices.contains(index)
+                                   ? palette.accent.opacity(0.25)
+                                   : Theme.surface)
+                        .foregroundStyle(vm.tappedIndices.contains(index)
+                                         ? Theme.onSurfaceMuted
+                                         : Theme.onSurface)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
+                .disabled(vm.tappedIndices.contains(index))
             }
+        }
+    }
+
+    private func finishedView(summary: AnalyticsService.Summary, completion: Double) -> some View {
+        VStack(spacing: 12) {
+            Text("test.finished.title")
+                .font(.optDashboardTitle)
+            HStack(spacing: 12) {
+                MetricTile(
+                    labelKey: "metric.completion",
+                    value: String(format: "%.1f s", completion / 1000),
+                    symbol: "clock.fill")
+                MetricTile(
+                    labelKey: "metric.mistakes",
+                    value: "\(summary.mistakeCount)",
+                    symbol: "xmark.octagon.fill")
+            }
+            MetricTile(
+                labelKey: "metric.stability",
+                value: summary.stabilityCV.map { String(format: "%.2f", $0) } ?? "—",
+                symbol: "waveform.path.ecg")
+            Button("test.finished.save") {
+                vm.persist(in: context)
+                dismiss()
+            }
+            .buttonStyle(PrimaryButtonStyle())
+            .padding(.top)
         }
     }
 }

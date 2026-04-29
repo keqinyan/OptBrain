@@ -5,6 +5,7 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var context
     @Query private var sessions: [Session]
     @AppStorage("appLanguage") private var appLanguage: String = "system"
+    @AppStorage("themePalette") private var paletteRaw: String = ThemePalette.teal.rawValue
 
     @State private var exportURL: URL?
     @State private var showExporter = false
@@ -22,6 +23,10 @@ struct SettingsView: View {
                     }
                     .pickerStyle(.inline)
                     .labelsHidden()
+                }
+
+                Section("settings.theme") {
+                    ThemePickerRow(selection: $paletteRaw)
                 }
 
                 Section("settings.data") {
@@ -89,6 +94,7 @@ struct SettingsView: View {
 
 private struct HealthPermissionSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.palette) private var palette
     @State private var isWorking = false
 
     var body: some View {
@@ -96,7 +102,7 @@ private struct HealthPermissionSheet: View {
             VStack(spacing: 16) {
                 Image(systemName: "heart.text.square")
                     .font(.system(size: 56, weight: .light))
-                    .foregroundStyle(Theme.accent)
+                    .foregroundStyle(palette.accent)
                 Text("settings.health.title").font(.optDashboardTitle)
                 Text("settings.health.body")
                     .multilineTextAlignment(.center)
@@ -127,4 +133,62 @@ private struct ShareSheet: UIViewControllerRepresentable {
         UIActivityViewController(activityItems: items, applicationActivities: nil)
     }
     func updateUIViewController(_ vc: UIActivityViewController, context: Context) {}
+}
+
+private struct ThemePickerRow: View {
+    @Binding var selection: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 14) {
+                ForEach(ThemePalette.allCases) { palette in
+                    swatch(for: palette)
+                }
+                Spacer()
+            }
+            Text(LocalizedStringKey(currentPalette.displayKey))
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(Theme.onSurfaceMuted)
+        }
+        .padding(.vertical, 6)
+    }
+
+    private var currentPalette: ThemePalette {
+        ThemePalette(rawValue: selection) ?? .teal
+    }
+
+    @ViewBuilder
+    private func swatch(for palette: ThemePalette) -> some View {
+        let isSelected = palette.rawValue == selection
+        Button {
+            withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
+                selection = palette.rawValue
+            }
+        } label: {
+            ZStack {
+                Circle()
+                    .fill(palette.accent)
+                    .frame(width: 36, height: 36)
+                    .overlay(
+                        Circle()
+                            .stroke(Theme.onSurface.opacity(0.08), lineWidth: 1)
+                    )
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(.white)
+                        .shadow(color: .black.opacity(0.25), radius: 1, y: 1)
+                }
+            }
+            .padding(4)
+            .background(
+                Circle()
+                    .stroke(palette.accent, lineWidth: isSelected ? 2 : 0)
+            )
+            .scaleEffect(isSelected ? 1.05 : 1)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(LocalizedStringKey(palette.displayKey)))
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
 }

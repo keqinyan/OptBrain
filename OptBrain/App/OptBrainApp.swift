@@ -5,6 +5,7 @@ import SwiftData
 struct OptBrainApp: App {
     @AppStorage("hasOnboarded") private var hasOnboarded = false
     @AppStorage("appLanguage") private var appLanguage: String = "system"
+    @AppStorage("themePalette") private var paletteRaw: String = ThemePalette.teal.rawValue
 
     var body: some Scene {
         WindowGroup {
@@ -16,10 +17,15 @@ struct OptBrainApp: App {
                 }
             }
             .environment(\.locale, resolvedLocale)
+            .environment(\.palette, currentPalette)
             .preferredColorScheme(nil)
-            .tint(Theme.accent)
+            .tint(currentPalette.accent)
         }
         .modelContainer(PersistenceController.shared.container)
+    }
+
+    private var currentPalette: ThemePalette {
+        ThemePalette(rawValue: paletteRaw) ?? .teal
     }
 
     private var resolvedLocale: Locale {

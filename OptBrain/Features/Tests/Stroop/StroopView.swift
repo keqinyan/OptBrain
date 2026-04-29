@@ -3,6 +3,7 @@ import SwiftUI
 struct StroopView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.palette) private var palette
     @State private var vm = StroopViewModel()
 
     var body: some View {
@@ -33,7 +34,7 @@ struct StroopView: View {
             Spacer()
             Image(systemName: "paintpalette.fill")
                 .font(.system(size: 56, weight: .light))
-                .foregroundStyle(Theme.accent)
+                .foregroundStyle(palette.accent)
             Text("test.stroop.instructions")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
@@ -46,7 +47,7 @@ struct StroopView: View {
     private var runningView: some View {
         VStack(spacing: 32) {
             ProgressView(value: Double(vm.currentTrial), total: Double(vm.totalTrials))
-                .tint(Theme.accent)
+                .tint(palette.accent)
 
             Spacer()
             Text(LocalizedStringKey(vm.stimulus.word.labelKey))
