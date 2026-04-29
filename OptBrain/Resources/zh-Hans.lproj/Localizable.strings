@@ -33,9 +33,9 @@
 "home.streak.title" = "连续";
 "home.streak.subtitle" = "连续天数";
 "home.tests.title" = "快速开始";
-"home.stat.today" = "今天";
-"home.stat.week" = "本周";
-"home.stat.streak" = "连续";
+"home.stat.today" = "今日次数";
+"home.stat.week" = "本周次数";
+"home.stat.streak" = "连续天数";
 "home.recent.title" = "最近记录";
 "home.recent.yesterday" = "昨天";
 
@@ -77,6 +77,7 @@
 "metric.sessions" = "次数";
 "metric.completion" = "用时";
 "metric.mistakes" = "错误";
+"metric.avgResponse" = "平均反应";
 
 /* Time of day */
 "tod.morning" = "早晨";
@@ -119,6 +120,7 @@
 "settings.title" = "设置";
 "settings.language" = "语言";
 "settings.language.system" = "跟随系统";
+"settings.language.restartHint" = "切换语言将在下次启动应用后生效。";
 "settings.theme" = "主题色";
 "theme.teal" = "实验室绿";
 "theme.indigo" = "深海蓝";

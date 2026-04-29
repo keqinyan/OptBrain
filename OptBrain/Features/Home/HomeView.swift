@@ -45,19 +45,21 @@ struct HomeView: View {
             divider
             statPill(value: "\(currentStreak)", labelKey: "home.stat.streak")
         }
-        .padding(.vertical, 12)
+        .padding(.vertical, 14)
         .background(Theme.surface)
         .clipShape(RoundedRectangle(cornerRadius: Theme.cornerRadius, style: .continuous))
     }
 
     private func statPill(value: String, labelKey: String) -> some View {
-        VStack(spacing: 2) {
+        VStack(spacing: 4) {
+            Text(LocalizedStringKey(labelKey))
+                .font(.caption2.weight(.medium))
+                .foregroundStyle(Theme.onSurfaceMuted)
+                .textCase(.uppercase)
+                .tracking(0.5)
             Text(value)
                 .font(.title2.weight(.semibold).monospacedDigit())
                 .foregroundStyle(Theme.onSurface)
-            Text(LocalizedStringKey(labelKey))
-                .font(.caption2)
-                .foregroundStyle(Theme.onSurfaceMuted)
         }
         .frame(maxWidth: .infinity)
     }
@@ -136,14 +138,35 @@ struct HomeView: View {
                     .monospacedDigit()
             }
             Spacer()
-            if let rt = session.meanResponseTimeMs {
+            sessionMetric(for: session)
+        }
+    }
+
+    @ViewBuilder
+    private func sessionMetric(for session: Session) -> some View {
+        // Show the most representative metric for each test type, with a label
+        // so the unit reads as "avg response", "completion", etc.
+        if let rt = session.meanResponseTimeMs {
+            VStack(alignment: .trailing, spacing: 2) {
+                Text("metric.avgResponse")
+                    .font(.caption2.weight(.medium))
+                    .foregroundStyle(Theme.onSurfaceMuted)
+                    .textCase(.uppercase)
+                    .tracking(0.4)
                 Text(String(format: "%.0f ms", rt))
-                    .font(.caption.monospacedDigit())
+                    .font(.subheadline.weight(.semibold).monospacedDigit())
+                    .foregroundStyle(Theme.onSurface)
+            }
+        } else if let c = session.completionTimeMs {
+            VStack(alignment: .trailing, spacing: 2) {
+                Text("metric.completion")
+                    .font(.caption2.weight(.medium))
                     .foregroundStyle(Theme.onSurfaceMuted)
-            } else if let c = session.completionTimeMs {
+                    .textCase(.uppercase)
+                    .tracking(0.4)
                 Text(String(format: "%.1f s", c / 1000))
-                    .font(.caption.monospacedDigit())
-                    .foregroundStyle(Theme.onSurfaceMuted)
+                    .font(.subheadline.weight(.semibold).monospacedDigit())
+                    .foregroundStyle(Theme.onSurface)
             }
         }
     }

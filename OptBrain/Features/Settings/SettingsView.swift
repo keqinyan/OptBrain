@@ -15,7 +15,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("settings.language") {
+                Section {
                     Picker("settings.language", selection: $appLanguage) {
                         Text("settings.language.system").tag("system")
                         Text("English").tag("en")
@@ -23,6 +23,11 @@ struct SettingsView: View {
                     }
                     .pickerStyle(.inline)
                     .labelsHidden()
+                } header: {
+                    Text("settings.language")
+                } footer: {
+                    Text("settings.language.restartHint")
+                        .font(.caption)
                 }
 
                 Section("settings.theme") {

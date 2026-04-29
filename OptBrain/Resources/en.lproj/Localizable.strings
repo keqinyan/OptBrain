@@ -33,9 +33,9 @@
 "home.streak.title" = "Streak";
 "home.streak.subtitle" = "Consecutive days";
 "home.tests.title" = "Quick start";
-"home.stat.today" = "Today";
+"home.stat.today" = "Sessions today";
 "home.stat.week" = "This week";
-"home.stat.streak" = "Streak";
+"home.stat.streak" = "Day streak";
 "home.recent.title" = "Recent sessions";
 "home.recent.yesterday" = "Yesterday";
 
@@ -77,6 +77,7 @@
 "metric.sessions" = "Sessions";
 "metric.completion" = "Completion";
 "metric.mistakes" = "Mistakes";
+"metric.avgResponse" = "Avg response";
 
 /* Time of day */
 "tod.morning" = "morning";
@@ -119,6 +120,7 @@
 "settings.title" = "Settings";
 "settings.language" = "Language";
 "settings.language.system" = "System";
+"settings.language.restartHint" = "Switching language takes effect after the next app launch.";
 "settings.theme" = "Theme";
 "theme.teal" = "Lab Teal";
 "theme.indigo" = "Deep Indigo";
