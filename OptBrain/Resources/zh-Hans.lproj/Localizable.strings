@@ -1,0 +1,120 @@
+/* Tabs */
+"tab.home" = "主页";
+"tab.insights" = "洞察";
+"tab.settings" = "设置";
+
+/* Common */
+"common.cancel" = "取消";
+"common.notNow" = "暂不";
+"common.loading" = "加载中…";
+
+/* Onboarding */
+"onboarding.welcome.title" = "你的认知小实验室";
+"onboarding.welcome.body" = "OptBrain 帮助你发现自己头脑最清醒的时段。它是个人探索工具,不是医疗设备。";
+"onboarding.howItWorks.title" = "运作方式";
+"onboarding.howItWorks.body" = "在不同时段完成 30–60 秒的小测试。我们记录速度、准确率和稳定性,帮你看到自己的节律。";
+"onboarding.privacy.title" = "数据保留在本机";
+"onboarding.privacy.body" = "所有数据本地存储,Apple 健康为可选项,不强制连接。";
+"onboarding.cta.continue" = "继续";
+"onboarding.cta.start" = "开始使用";
+"onboarding.disclaimer" = "OptBrain 不诊断或治疗任何疾病。洞察仅供参考,不构成医学建议。";
+
+/* Home */
+"home.title" = "OptBrain";
+"home.subtitle" = "看看你今天到目前的状态。";
+"home.greeting.morning" = "早上好";
+"home.greeting.afternoon" = "下午好";
+"home.greeting.evening" = "晚上好";
+"home.greeting.night" = "深夜了?";
+"home.today.title" = "今天";
+"home.today.empty" = "今天还没有记录。一个 60 秒的小测试就够了。";
+"home.week.title" = "本周";
+"home.week.subtitle" = "已完成的测试";
+"home.streak.title" = "连续";
+"home.streak.subtitle" = "连续天数";
+"home.tests.title" = "快速开始";
+
+/* Tests */
+"test.reactionTime.title" = "反应时间";
+"test.reactionTime.subtitle" = "屏幕变绿后立刻点击。";
+"test.reactionTime.tapToStart" = "点击开始";
+"test.reactionTime.instructions" = "等待屏幕变绿,然后尽快点击。提前点击会判定为犯规。";
+"test.reactionTime.wait" = "等待…";
+"test.reactionTime.tapNow" = "点击";
+"test.reactionTime.falseStart" = "太早了 — 等屏幕变绿。";
+"test.reactionTime.missed" = "未点击";
+
+"test.stroop.title" = "Stroop 颜色测试";
+"test.stroop.subtitle" = "选择文字的颜色,而不是文字本身。";
+"test.stroop.instructions" = "屏幕会显示一个颜色词,但显示颜色与词义不一致。请选择你看到的颜色,而不是这个词。";
+"test.stroop.start" = "开始";
+
+"test.numberOrder.title" = "数字排序";
+"test.numberOrder.subtitle" = "按从小到大依次点击数字。";
+"test.numberOrder.instructions" = "数字打乱排列在网格中。请从 1 开始,按升序尽快点击。";
+"test.numberOrder.start" = "开始";
+"test.numberOrder.next" = "下一个:";
+
+"test.finished.title" = "测试完成";
+"test.finished.save" = "保存本次记录";
+
+/* Metrics */
+"metric.speed" = "速度";
+"metric.accuracy" = "准确率";
+"metric.stability" = "稳定性";
+"metric.sessions" = "次数";
+"metric.completion" = "用时";
+"metric.mistakes" = "错误";
+
+/* Time of day */
+"tod.morning" = "早晨";
+"tod.afternoon" = "下午";
+"tod.evening" = "傍晚";
+"tod.night" = "深夜";
+
+/* Colors */
+"color.red" = "红色";
+"color.green" = "绿色";
+"color.blue" = "蓝色";
+"color.yellow" = "黄色";
+
+/* Insights */
+"insights.title" = "洞察";
+"insights.overview.title" = "整体";
+"insights.overview.note" = "基于所有已完成测试的平均值。";
+"insights.section.title" = "你的数据显示";
+"insights.byTOD.title" = "按时段";
+"insights.byTOD.empty" = "再完成几次测试,就能看到时段差异。";
+
+"insights.notEnoughData.title" = "数据还不够";
+"insights.notEnoughData.body" = "至少完成 %@ 次测试,才能解锁个性化观察。";
+"insights.bestTOD.title" = "时段倾向";
+"insights.bestTOD.body" = "你的数据显示,你的%@速度通常在%@最快。";
+"insights.worstStability.title" = "稳定性倾向";
+"insights.worstStability.body" = "你的%@反应在%@波动相对最大。";
+"insights.baselineShift.title" = "近期变化";
+"insights.fasterThanBaseline.body" = "你最近一次%@的速度比近 7 日基线快约 %@%%。";
+"insights.slowerThanBaseline.body" = "你最近一次%@的速度比近 7 日基线慢约 %@%%。";
+"insights.noStrongClaims.title" = "暂无明显规律";
+"insights.noStrongClaims.body" = "目前数据还看不出清晰趋势。可以在不同时段多做几次。";
+
+/* Settings */
+"settings.title" = "设置";
+"settings.language" = "语言";
+"settings.language.system" = "跟随系统";
+"settings.data" = "数据";
+"settings.export.csv" = "导出 CSV";
+"settings.export.json" = "导出 JSON";
+"settings.health.connect" = "连接 Apple 健康";
+"settings.health.title" = "Apple 健康";
+"settings.health.body" = "OptBrain 可以读取睡眠、步数、静息心率与 HRV,辅助生成洞察。可选功能,不连接也能正常使用。";
+"settings.health.cta" = "授权访问";
+"settings.wipe" = "删除所有本地数据";
+"settings.wipe.confirm.title" = "确认全部删除?";
+"settings.wipe.confirm.body" = "此操作将永久移除本机存储的所有测试与试次数据。";
+"settings.wipe.confirm.action" = "删除";
+"settings.privacy" = "隐私";
+"settings.privacy.body" = "数据仅保存在本机。除非你主动导出,否则不会上传到任何地方。";
+"settings.about" = "关于";
+"settings.about.version" = "版本";
+"settings.about.disclaimer" = "OptBrain 是个人探索工具,不是医疗设备,不作任何诊断声明。";
