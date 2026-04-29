@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct NumberOrderView: View {
     @Environment(\.modelContext) private var context
@@ -81,7 +82,7 @@ struct NumberOrderView: View {
     private var grid: some View {
         let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: vm.gridSize)
         // Tighter font for larger grids so 2-digit numbers fit cleanly.
-        let baseFont: Font = vm.gridSize >= 5 ? .title3 : .title2
+        let baseFont: Font.TextStyle = vm.gridSize >= 5 ? .title3 : .title2
         return LazyVGrid(columns: columns, spacing: 8) {
             ForEach(Array(vm.numbers.enumerated()), id: \.offset) { index, value in
                 Button {
