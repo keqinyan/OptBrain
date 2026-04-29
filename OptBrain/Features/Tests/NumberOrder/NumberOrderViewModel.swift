@@ -15,7 +15,7 @@ final class NumberOrderViewModel {
         }
     }
 
-    let gridSize: Int
+    var gridSize: Int
     private(set) var numbers: [Int] = []
     private(set) var nextExpected: Int = 1
     private(set) var tappedIndices: Set<Int> = []
@@ -28,6 +28,11 @@ final class NumberOrderViewModel {
 
     init(gridSize: Int = 4) {
         self.gridSize = gridSize
+    }
+
+    func setGridSize(_ size: Int) {
+        guard case .idle = phase else { return }
+        gridSize = size
     }
 
     var totalCells: Int { gridSize * gridSize }

@@ -47,36 +47,59 @@ struct HomeView: View {
 
     private var todaySnapshot: some View {
         let today = todaysSessions
-        let meanRT = AnalyticsService.mean(of: today.compactMap { $0.meanResponseTimeMs })
-        let meanAcc = AnalyticsService.mean(of: today.compactMap { $0.accuracy })
-
         return Card {
             VStack(alignment: .leading, spacing: 12) {
-                Text("home.today.title")
-                    .font(.headline)
+                HStack {
+                    Text("home.today.title").font(.headline)
+                    Spacer()
+                    Text("metric.sessions").font(.caption).foregroundStyle(Theme.onSurfaceMuted)
+                    Text("\(today.count)").font(.subheadline.bold()).monospacedDigit()
+                }
                 if today.isEmpty {
                     Text("home.today.empty")
                         .foregroundStyle(Theme.onSurfaceMuted)
                 } else {
-                    HStack(spacing: 12) {
-                        MetricTile(
-                            labelKey: "metric.speed",
-                            value: meanRT.map { String(format: "%.0f ms", $0) } ?? "—",
-                            symbol: "bolt.fill"
-                        )
-                        MetricTile(
-                            labelKey: "metric.accuracy",
-                            value: meanAcc.map { String(format: "%.0f%%", $0 * 100) } ?? "—",
-                            symbol: "target"
-                        )
-                        MetricTile(
-                            labelKey: "metric.sessions",
-                            value: "\(today.count)",
-                            symbol: "checkmark.circle.fill"
-                        )
+                    // Per-test rows: each test compares only with itself.
+                    ForEach(TestType.allCases) { type in
+                        let typeSessions = today.filter { $0.testType == type }
+                        if !typeSessions.isEmpty {
+                            todayRow(type: type, sessions: typeSessions)
+                            if type != TestType.allCases.last {
+                                Divider()
+                            }
+                        }
                     }
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private func todayRow(type: TestType, sessions: [Session]) -> some View {
+        let meanRT = AnalyticsService.mean(of: sessions.compactMap { $0.meanResponseTimeMs })
+        let meanAcc = AnalyticsService.mean(of: sessions.compactMap { $0.accuracy })
+        HStack(spacing: 10) {
+            Image(systemName: type.symbol)
+                .foregroundStyle(Theme.accent)
+                .frame(width: 24)
+            Text(LocalizedStringKey(type.displayKey))
+                .font(.subheadline.weight(.semibold))
+            Spacer()
+            if let rt = meanRT {
+                Label(String(format: "%.0f ms", rt), systemImage: "bolt.fill")
+                    .labelStyle(.titleAndIcon)
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(Theme.onSurfaceMuted)
+            }
+            if let acc = meanAcc {
+                Label(String(format: "%.0f%%", acc * 100), systemImage: "target")
+                    .labelStyle(.titleAndIcon)
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(Theme.onSurfaceMuted)
+            }
+            Text("×\(sessions.count)")
+                .font(.caption.bold().monospacedDigit())
+                .foregroundStyle(Theme.onSurface)
         }
     }
 

@@ -54,6 +54,7 @@
 "test.numberOrder.instructions" = "Numbers are shuffled across a grid. Tap them in order from 1 upward as fast as you can.";
 "test.numberOrder.start" = "Start";
 "test.numberOrder.next" = "Next:";
+"test.numberOrder.gridSize" = "Grid size";
 
 "test.finished.title" = "Session complete";
 "test.finished.save" = "Save session";
@@ -81,7 +82,8 @@
 /* Insights */
 "insights.title" = "Insights";
 "insights.overview.title" = "Overall";
-"insights.overview.note" = "Averaged across all completed sessions.";
+"insights.overview.note" = "Averaged within each test only — speed and accuracy aren't compared across different tests.";
+"insights.overview.empty" = "Complete a session to see your stats here.";
 "insights.section.title" = "What your data suggests";
 "insights.byTOD.title" = "By time of day";
 "insights.byTOD.empty" = "Complete a few more sessions to see patterns.";

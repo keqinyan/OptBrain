@@ -54,6 +54,7 @@
 "test.numberOrder.instructions" = "数字打乱排列在网格中。请从 1 开始,按升序尽快点击。";
 "test.numberOrder.start" = "开始";
 "test.numberOrder.next" = "下一个:";
+"test.numberOrder.gridSize" = "网格尺寸";
 
 "test.finished.title" = "测试完成";
 "test.finished.save" = "保存本次记录";
@@ -81,7 +82,8 @@
 /* Insights */
 "insights.title" = "洞察";
 "insights.overview.title" = "整体";
-"insights.overview.note" = "基于所有已完成测试的平均值。";
+"insights.overview.note" = "每个测试单独平均 —— 不同测试之间不直接比较速度和准确率。";
+"insights.overview.empty" = "完成一次测试,这里就会出现你的数据。";
 "insights.section.title" = "你的数据显示";
 "insights.byTOD.title" = "按时段";
 "insights.byTOD.empty" = "再完成几次测试,就能看到时段差异。";
