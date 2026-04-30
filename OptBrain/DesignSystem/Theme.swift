@@ -29,12 +29,14 @@ extension Font {
 
 enum ThemePalette: String, CaseIterable, Identifiable {
     case teal       // default — matches the AccentColor asset
+    case sky
     case indigo
-    case amber
+    case lavender
     case rose
+    case crimson
+    case amber
     case forest
     case slate
-    case lavender
     case graphite
 
     var id: String { rawValue }
@@ -42,12 +44,14 @@ enum ThemePalette: String, CaseIterable, Identifiable {
     var displayKey: String {
         switch self {
         case .teal:     return "theme.teal"
+        case .sky:      return "theme.sky"
         case .indigo:   return "theme.indigo"
-        case .amber:    return "theme.amber"
+        case .lavender: return "theme.lavender"
         case .rose:     return "theme.rose"
+        case .crimson:  return "theme.crimson"
+        case .amber:    return "theme.amber"
         case .forest:   return "theme.forest"
         case .slate:    return "theme.slate"
-        case .lavender: return "theme.lavender"
         case .graphite: return "theme.graphite"
         }
     }
@@ -56,12 +60,14 @@ enum ThemePalette: String, CaseIterable, Identifiable {
     private var components: (light: (Double, Double, Double), dark: (Double, Double, Double)) {
         switch self {
         case .teal:     return ((0.165, 0.616, 0.561), (0.310, 0.741, 0.667))
+        case .sky:      return ((0.024, 0.588, 0.780), (0.310, 0.714, 0.847))
         case .indigo:   return ((0.231, 0.353, 0.627), (0.435, 0.553, 0.808))
-        case .amber:    return ((0.890, 0.561, 0.165), (0.965, 0.694, 0.310))
+        case .lavender: return ((0.435, 0.337, 0.580), (0.624, 0.522, 0.765))
         case .rose:     return ((0.769, 0.227, 0.318), (0.886, 0.435, 0.510))
+        case .crimson:  return ((0.545, 0.110, 0.235), (0.741, 0.275, 0.388))
+        case .amber:    return ((0.890, 0.561, 0.165), (0.965, 0.694, 0.310))
         case .forest:   return ((0.247, 0.416, 0.302), (0.420, 0.643, 0.475))
         case .slate:    return ((0.290, 0.361, 0.416), (0.518, 0.604, 0.671))
-        case .lavender: return ((0.435, 0.337, 0.580), (0.624, 0.522, 0.765))
         case .graphite: return ((0.298, 0.337, 0.380), (0.580, 0.620, 0.667))
         }
     }

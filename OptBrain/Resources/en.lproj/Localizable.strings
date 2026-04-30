@@ -132,12 +132,14 @@
 "settings.language.restartHint" = "Switching language takes effect after the next app launch.";
 "settings.theme" = "Theme";
 "theme.teal" = "Lab Teal";
+"theme.sky" = "Sky";
 "theme.indigo" = "Deep Indigo";
-"theme.amber" = "Warm Amber";
+"theme.lavender" = "Lavender";
 "theme.rose" = "Rose";
+"theme.crimson" = "Crimson";
+"theme.amber" = "Warm Amber";
 "theme.forest" = "Forest";
 "theme.slate" = "Slate";
-"theme.lavender" = "Lavender";
 "theme.graphite" = "Graphite";
 "settings.data" = "Data";
 "settings.export.csv" = "Export as CSV";

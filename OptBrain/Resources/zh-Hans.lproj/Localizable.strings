@@ -132,12 +132,14 @@
 "settings.language.restartHint" = "切换语言将在下次启动应用后生效。";
 "settings.theme" = "主题色";
 "theme.teal" = "实验室绿";
+"theme.sky" = "天空蓝";
 "theme.indigo" = "深海蓝";
-"theme.amber" = "暖琥珀";
+"theme.lavender" = "薰衣草";
 "theme.rose" = "玫瑰红";
+"theme.crimson" = "酒红";
+"theme.amber" = "暖琥珀";
 "theme.forest" = "森林绿";
 "theme.slate" = "石板蓝";
-"theme.lavender" = "薰衣草";
 "theme.graphite" = "石墨灰";
 "settings.data" = "数据";
 "settings.export.csv" = "导出 CSV";
