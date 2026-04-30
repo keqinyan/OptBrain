@@ -23,6 +23,16 @@ struct SettingsView: View {
                     }
                     .pickerStyle(.inline)
                     .labelsHidden()
+                    .onChange(of: appLanguage) { _, newValue in
+                        // Bundle.main.preferredLocalizations is decided at launch from
+                        // AppleLanguages, so we write it immediately here. The next launch
+                        // picks the right .lproj before any string lookup happens.
+                        if newValue == "system" {
+                            UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+                        } else {
+                            UserDefaults.standard.set([newValue], forKey: "AppleLanguages")
+                        }
+                    }
                 } header: {
                     Text("settings.language")
                 } footer: {

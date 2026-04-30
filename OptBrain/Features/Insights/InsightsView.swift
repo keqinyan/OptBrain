@@ -24,6 +24,7 @@ struct InsightsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     overviewCard
+                    metricGlossaryCard
                     trendCard
                     insightsSection
                     timeOfDaySection
@@ -31,6 +32,50 @@ struct InsightsView: View {
                 .padding()
             }
             .navigationTitle("insights.title")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+
+    private var metricGlossaryCard: some View {
+        Card {
+            DisclosureGroup {
+                VStack(alignment: .leading, spacing: 10) {
+                    glossaryRow(symbol: "bolt.fill",
+                                titleKey: "metric.speed",
+                                bodyKey: "glossary.speed.body")
+                    glossaryRow(symbol: "target",
+                                titleKey: "metric.accuracy",
+                                bodyKey: "glossary.accuracy.body")
+                    glossaryRow(symbol: "waveform.path.ecg",
+                                titleKey: "metric.stability",
+                                bodyKey: "glossary.stability.body")
+                }
+                .padding(.top, 8)
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "info.circle")
+                        .foregroundStyle(palette.accent)
+                    Text("glossary.title")
+                        .font(.subheadline.weight(.semibold))
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func glossaryRow(symbol: String, titleKey: String, bodyKey: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: symbol)
+                .foregroundStyle(palette.accent)
+                .frame(width: 22)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(LocalizedStringKey(titleKey))
+                    .font(.subheadline.weight(.semibold))
+                Text(LocalizedStringKey(bodyKey))
+                    .font(.caption)
+                    .foregroundStyle(Theme.onSurfaceMuted)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 
