@@ -38,8 +38,6 @@
 "home.stat.streak" = "连续天数";
 "home.recent.title" = "最近记录";
 "home.recent.yesterday" = "昨天";
-"home.activity.title" = "近 14 天";
-"home.activity.subtitle" = "每个圆点代表一天,填充表示当天有记录。";
 
 /* Tests */
 "test.reactionTime.title" = "反应时间";
@@ -96,7 +94,7 @@
 /* Insights */
 "insights.title" = "趋势";
 "insights.overview.title" = "整体";
-"insights.overview.note" = "每个测试单独平均 —— 不同测试之间不直接比较速度和准确率。";
+"insights.overview.note" = "每个测试单独平均,不同测试之间不直接比较速度和准确率。";
 "insights.overview.empty" = "完成一次测试,这里就会出现你的数据。";
 "insights.section.title" = "你的数据显示";
 "insights.byTOD.title" = "按时段";
@@ -105,7 +103,7 @@
 "glossary.title" = "这些指标是什么意思?";
 "glossary.speed.body" = "反应时间或完成时间的均值,单位毫秒。数值越小越快。";
 "glossary.accuracy.body" = "答对的比例。100% 表示全部正确。";
-"glossary.stability.body" = "同一次测试内反应时间的稳定程度 —— 变异系数 (标准差 ÷ 均值)。越低越稳,越高越离散。";
+"glossary.stability.body" = "同一次测试内反应时间的稳定程度,变异系数 (标准差 ÷ 均值)。越低越稳,越高越离散。";
 "insights.trend.title" = "近 7 日趋势";
 "insights.trend.preview" = "示意";
 "insights.trend.body" = "所选测试和指标在最近 7 天的每日均值。";
