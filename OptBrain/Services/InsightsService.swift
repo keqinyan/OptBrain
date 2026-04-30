@@ -1,12 +1,31 @@
 import Foundation
 
 /// Rule-based insight generation. Threshold-gated by sample size.
-/// Copy is deliberately hedged - "your data suggests..." - never prescriptive.
+/// Copy is deliberately hedged ("your data suggests…") and never prescriptive.
 struct InsightsService {
+
+    enum Category: String, CaseIterable, Identifiable {
+        case timeOfDay
+        case stability
+        case baseline
+        case info        // standalone notices (not enough data, no strong patterns)
+
+        var id: String { rawValue }
+        var titleKey: String {
+            switch self {
+            case .timeOfDay: return "insights.bestTOD.title"
+            case .stability: return "insights.worstStability.title"
+            case .baseline:  return "insights.baselineShift.title"
+            case .info:      return ""
+            }
+        }
+    }
 
     struct Insight: Identifiable, Hashable {
         let id = UUID()
-        let titleKey: String
+        let category: Category
+        /// nil for info-only entries.
+        let testType: TestType?
         let bodyKey: String
         let bodyArgs: [String]
     }
@@ -20,7 +39,8 @@ struct InsightsService {
     static func generate(sessions: [Session]) -> [Insight] {
         guard sessions.count >= minSessionsForInsights else {
             return [Insight(
-                titleKey: "insights.notEnoughData.title",
+                category: .info,
+                testType: nil,
                 bodyKey: "insights.notEnoughData.body",
                 bodyArgs: ["\(minSessionsForInsights)"]
             )]
@@ -37,12 +57,10 @@ struct InsightsService {
             if speedByTOD.count >= minBucketsForTimeOfDay,
                let best = speedByTOD.min(by: { $0.value < $1.value }) {
                 insights.append(Insight(
-                    titleKey: "insights.bestTOD.title",
+                    category: .timeOfDay,
+                    testType: testType,
                     bodyKey: "insights.bestTOD.body",
-                    bodyArgs: [
-                        NSLocalizedString(testType.displayKey, comment: ""),
-                        NSLocalizedString(best.key.displayKey, comment: "")
-                    ]
+                    bodyArgs: [NSLocalizedString(best.key.displayKey, comment: "")]
                 ))
             }
 
@@ -51,12 +69,10 @@ struct InsightsService {
             if stabilityByTOD.count >= minBucketsForTimeOfDay,
                let worst = stabilityByTOD.max(by: { $0.value < $1.value }) {
                 insights.append(Insight(
-                    titleKey: "insights.worstStability.title",
+                    category: .stability,
+                    testType: testType,
                     bodyKey: "insights.worstStability.body",
-                    bodyArgs: [
-                        NSLocalizedString(testType.displayKey, comment: ""),
-                        NSLocalizedString(worst.key.displayKey, comment: "")
-                    ]
+                    bodyArgs: [NSLocalizedString(worst.key.displayKey, comment: "")]
                 ))
             }
 
@@ -73,12 +89,10 @@ struct InsightsService {
                 if abs(delta) >= 0.10 {
                     let key = delta < 0 ? "insights.fasterThanBaseline.body" : "insights.slowerThanBaseline.body"
                     insights.append(Insight(
-                        titleKey: "insights.baselineShift.title",
+                        category: .baseline,
+                        testType: testType,
                         bodyKey: key,
-                        bodyArgs: [
-                            NSLocalizedString(testType.displayKey, comment: ""),
-                            String(format: "%.0f", abs(delta) * 100)
-                        ]
+                        bodyArgs: [String(format: "%.0f", abs(delta) * 100)]
                     ))
                 }
             }
@@ -86,7 +100,8 @@ struct InsightsService {
 
         if insights.isEmpty {
             insights.append(Insight(
-                titleKey: "insights.noStrongClaims.title",
+                category: .info,
+                testType: nil,
                 bodyKey: "insights.noStrongClaims.body",
                 bodyArgs: []
             ))

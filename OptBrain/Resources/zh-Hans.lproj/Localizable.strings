@@ -107,7 +107,7 @@
 "glossary.title" = "这些指标是什么意思?";
 "glossary.speed.body" = "反应时间或完成时间的均值,单位毫秒。数值越小越快。";
 "glossary.accuracy.body" = "答对的比例。100% 表示全部正确。";
-"glossary.stability.body" = "同一次测试内反应时间的稳定程度,变异系数 (标准差 ÷ 均值)。越低越稳,越高越离散。";
+"glossary.stability.body" = "一次测试里反应时间的波动幅度,数值等于标准差除以均值。越小代表反应越稳。";
 "insights.trend.title" = "近 7 日趋势";
 "insights.trend.preview" = "示意";
 "insights.trend.body" = "所选测试和指标在最近 7 天的每日均值。";
@@ -116,12 +116,12 @@
 "insights.notEnoughData.title" = "数据还不够";
 "insights.notEnoughData.body" = "至少完成 %@ 次测试,才能解锁个性化观察。";
 "insights.bestTOD.title" = "时段倾向";
-"insights.bestTOD.body" = "你的数据显示,你的%@速度通常在%@最快。";
+"insights.bestTOD.body" = "通常在%@最快。";
 "insights.worstStability.title" = "稳定性倾向";
-"insights.worstStability.body" = "你的%@反应在%@波动相对最大。";
+"insights.worstStability.body" = "在%@波动最明显。";
 "insights.baselineShift.title" = "近期变化";
-"insights.fasterThanBaseline.body" = "你最近一次%@的速度比近 7 日基线快约 %@%%。";
-"insights.slowerThanBaseline.body" = "你最近一次%@的速度比近 7 日基线慢约 %@%%。";
+"insights.fasterThanBaseline.body" = "最近一次比近 7 日基线快约 %@%%。";
+"insights.slowerThanBaseline.body" = "最近一次比近 7 日基线慢约 %@%%。";
 "insights.noStrongClaims.title" = "暂无明显规律";
 "insights.noStrongClaims.body" = "目前数据还看不出清晰趋势。可以在不同时段多做几次。";
 

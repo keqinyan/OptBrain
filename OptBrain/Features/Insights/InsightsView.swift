@@ -138,22 +138,65 @@ struct InsightsView: View {
 
     private var insightsSection: some View {
         Card {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 14) {
                 Text("insights.section.title").font(.headline)
-                let insights = InsightsService.generate(sessions: sessions)
-                ForEach(insights) { insight in
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(LocalizedStringKey(insight.titleKey))
-                            .font(.subheadline.weight(.semibold))
+                let all = InsightsService.generate(sessions: sessions)
+                let infoOnly = all.filter { $0.category == .info }
+                let grouped = all.filter { $0.category != .info }
+
+                if !infoOnly.isEmpty && grouped.isEmpty {
+                    ForEach(infoOnly) { insight in
                         Text(localizedBody(insight))
                             .font(.callout)
                             .foregroundStyle(Theme.onSurfaceMuted)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    if insight.id != insights.last?.id { Divider() }
+                } else {
+                    let categories: [InsightsService.Category] = [.timeOfDay, .stability, .baseline]
+                    ForEach(categories) { category in
+                        let items = grouped
+                            .filter { $0.category == category }
+                            .sorted { lhs, rhs in
+                                let lo = TestType.allCases.firstIndex(of: lhs.testType ?? .reactionTime) ?? 0
+                                let ro = TestType.allCases.firstIndex(of: rhs.testType ?? .reactionTime) ?? 0
+                                return lo < ro
+                            }
+                        if !items.isEmpty {
+                            categoryGroup(category: category, items: items,
+                                          isLast: category == categories.last { c in
+                                              !grouped.filter { $0.category == c }.isEmpty
+                                          })
+                        }
+                    }
                 }
             }
         }
+    }
+
+    @ViewBuilder
+    private func categoryGroup(category: InsightsService.Category,
+                               items: [InsightsService.Insight],
+                               isLast: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(LocalizedStringKey(category.titleKey))
+                .font(.subheadline.weight(.semibold))
+            ForEach(items) { item in
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    if let testType = item.testType {
+                        Text(LocalizedStringKey(testType.shortDisplayKey))
+                            .font(.callout.weight(.semibold))
+                            .foregroundStyle(Theme.onSurface)
+                            .frame(minWidth: 56, alignment: .leading)
+                    }
+                    Text(localizedBody(item))
+                        .font(.callout)
+                        .foregroundStyle(Theme.onSurfaceMuted)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer(minLength: 0)
+                }
+            }
+        }
+        if !isLast { Divider().padding(.top, 2) }
     }
 
     private func localizedBody(_ insight: InsightsService.Insight) -> String {

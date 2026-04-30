@@ -107,7 +107,7 @@
 "glossary.title" = "What do these mean?";
 "glossary.speed.body" = "Average reaction or completion time, in milliseconds. Lower is faster.";
 "glossary.accuracy.body" = "Percent of trials answered correctly. 100% means no errors.";
-"glossary.stability.body" = "How consistent your response times are within a session. Coefficient of variation = standard deviation ÷ mean. Lower means steadier; higher means more scattered.";
+"glossary.stability.body" = "How much your response times vary inside a single test, calculated as standard deviation ÷ mean. Smaller numbers mean steadier reactions.";
 "insights.trend.title" = "7-day trend";
 "insights.trend.preview" = "PREVIEW";
 "insights.trend.body" = "Daily mean for the selected test and metric over the last 7 days.";
@@ -116,12 +116,12 @@
 "insights.notEnoughData.title" = "Not enough data yet";
 "insights.notEnoughData.body" = "Complete at least %@ sessions to unlock personalised observations.";
 "insights.bestTOD.title" = "Time-of-day pattern";
-"insights.bestTOD.body" = "Your data suggests your %@ speed tends to be quickest in the %@.";
+"insights.bestTOD.body" = "tends to be quickest in the %@.";
 "insights.worstStability.title" = "Stability pattern";
-"insights.worstStability.body" = "Your %@ responses appear most variable in the %@.";
+"insights.worstStability.body" = "responses look most variable in the %@.";
 "insights.baselineShift.title" = "Recent change";
-"insights.fasterThanBaseline.body" = "Your latest %@ session was about %@%% faster than your recent baseline.";
-"insights.slowerThanBaseline.body" = "Your latest %@ session was about %@%% slower than your recent baseline.";
+"insights.fasterThanBaseline.body" = "your latest session was about %@%% faster than your 7-day baseline.";
+"insights.slowerThanBaseline.body" = "your latest session was about %@%% slower than your 7-day baseline.";
 "insights.noStrongClaims.title" = "No strong patterns yet";
 "insights.noStrongClaims.body" = "Your data so far doesn't show a clear trend. Keep going at varied times of day.";
 
