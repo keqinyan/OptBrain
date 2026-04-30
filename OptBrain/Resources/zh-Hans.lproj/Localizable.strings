@@ -47,7 +47,7 @@
 "test.reactionTime.instructions" = "等待屏幕变绿,然后尽快点击。提前点击会判定为犯规。";
 "test.reactionTime.wait" = "等待…";
 "test.reactionTime.tapNow" = "点击";
-"test.reactionTime.falseStart" = "太早了 — 等屏幕变绿。";
+"test.reactionTime.falseStart" = "太早了,等屏幕变绿。";
 "test.reactionTime.missed" = "未点击";
 
 "test.stroop.title" = "Stroop 颜色测试";
