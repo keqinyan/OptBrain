@@ -26,6 +26,16 @@ enum TestType: String, Codable, CaseIterable, Identifiable {
         }
     }
 
+    /// Short label for tight UI like the trend picker. Always fits in a 4-segment control.
+    var shortDisplayKey: String {
+        switch self {
+        case .reactionTime: return "test.reactionTime.short"
+        case .stroop:       return "test.stroop.short"
+        case .numberOrder:  return "test.numberOrder.short"
+        case .memoryMatch:  return "test.memoryMatch.short"
+        }
+    }
+
     var symbol: String {
         switch self {
         case .reactionTime: return "bolt.fill"

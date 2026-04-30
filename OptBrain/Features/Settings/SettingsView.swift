@@ -155,11 +155,15 @@ private struct ThemePickerRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 14) {
+            // Flexible wrap so 8 swatches lay out cleanly on any width.
+            LazyVGrid(
+                columns: [GridItem(.adaptive(minimum: 48), spacing: 12)],
+                alignment: .leading,
+                spacing: 12
+            ) {
                 ForEach(ThemePalette.allCases) { palette in
                     swatch(for: palette)
                 }
-                Spacer()
             }
             Text(LocalizedStringKey(currentPalette.displayKey))
                 .font(.subheadline.weight(.medium))

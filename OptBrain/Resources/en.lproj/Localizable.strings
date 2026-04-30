@@ -42,20 +42,23 @@
 /* Tests */
 "test.reactionTime.title" = "Reaction Time";
 "test.reactionTime.subtitle" = "Tap as soon as the screen turns green.";
+"test.reactionTime.short" = "Reaction";
 "test.reactionTime.tapToStart" = "Tap to begin";
 "test.reactionTime.instructions" = "Wait for the screen to turn green, then tap as fast as you can. Don't tap early.";
 "test.reactionTime.wait" = "Wait…";
 "test.reactionTime.tapNow" = "TAP";
-"test.reactionTime.falseStart" = "Too soon — wait for green.";
+"test.reactionTime.falseStart" = "Too soon. Wait for green.";
 "test.reactionTime.missed" = "Missed";
 
 "test.stroop.title" = "Stroop";
 "test.stroop.subtitle" = "Pick the ink color, not the word.";
+"test.stroop.short" = "Stroop";
 "test.stroop.instructions" = "A color word will appear in a mismatched ink color. Tap the color you SEE, not the word.";
 "test.stroop.start" = "Start";
 
 "test.numberOrder.title" = "Number Order";
 "test.numberOrder.subtitle" = "Tap the numbers in ascending order.";
+"test.numberOrder.short" = "Numbers";
 "test.numberOrder.instructions" = "Numbers are shuffled across a grid. Tap them in order from 1 upward as fast as you can.";
 "test.numberOrder.start" = "Start";
 "test.numberOrder.next" = "Next:";
@@ -63,6 +66,7 @@
 
 "test.memoryMatch.title" = "Memory Match";
 "test.memoryMatch.subtitle" = "Flip pairs and remember.";
+"test.memoryMatch.short" = "Memory";
 "test.memoryMatch.instructions" = "Flip cards two at a time and find every matching pair. We track time, pair attempts, and mistakes.";
 "test.memoryMatch.start" = "Start";
 "test.memoryMatch.matches" = "Matches";
@@ -94,7 +98,7 @@
 /* Insights */
 "insights.title" = "Insights";
 "insights.overview.title" = "Overall";
-"insights.overview.note" = "Averaged within each test only — speed and accuracy aren't compared across different tests.";
+"insights.overview.note" = "Averaged within each test only. Speed and accuracy aren't compared across different tests.";
 "insights.overview.empty" = "Complete a session to see your stats here.";
 "insights.section.title" = "What your data suggests";
 "insights.byTOD.title" = "By time of day";
@@ -103,7 +107,7 @@
 "glossary.title" = "What do these mean?";
 "glossary.speed.body" = "Average reaction or completion time, in milliseconds. Lower is faster.";
 "glossary.accuracy.body" = "Percent of trials answered correctly. 100% means no errors.";
-"glossary.stability.body" = "How consistent your response times are within a session — coefficient of variation (standard deviation ÷ mean). Lower means steadier; higher means more scattered.";
+"glossary.stability.body" = "How consistent your response times are within a session. Coefficient of variation = standard deviation ÷ mean. Lower means steadier; higher means more scattered.";
 "insights.trend.title" = "7-day trend";
 "insights.trend.preview" = "PREVIEW";
 "insights.trend.body" = "Daily mean for the selected test and metric over the last 7 days.";
@@ -130,13 +134,17 @@
 "theme.teal" = "Lab Teal";
 "theme.indigo" = "Deep Indigo";
 "theme.amber" = "Warm Amber";
+"theme.rose" = "Rose";
+"theme.forest" = "Forest";
+"theme.slate" = "Slate";
+"theme.lavender" = "Lavender";
 "theme.graphite" = "Graphite";
 "settings.data" = "Data";
 "settings.export.csv" = "Export as CSV";
 "settings.export.json" = "Export as JSON";
 "settings.health.connect" = "Connect Apple Health";
 "settings.health.title" = "Apple Health";
-"settings.health.body" = "OptBrain can read sleep, steps, resting heart rate, and HRV to enrich your insights. This is optional — the app works fully without it.";
+"settings.health.body" = "OptBrain can read sleep, steps, resting heart rate, and HRV to enrich your insights. This is optional; the app works fully without it.";
 "settings.health.cta" = "Allow access";
 "settings.wipe" = "Delete all local data";
 "settings.wipe.confirm.title" = "Delete everything?";

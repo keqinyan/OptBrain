@@ -33,8 +33,8 @@
 "home.streak.title" = "连续";
 "home.streak.subtitle" = "连续天数";
 "home.tests.title" = "快速开始";
-"home.stat.today" = "今日";
-"home.stat.week" = "本周";
+"home.stat.today" = "今日测试";
+"home.stat.week" = "本周测试";
 "home.stat.streak" = "连续天数";
 "home.recent.title" = "最近记录";
 "home.recent.yesterday" = "昨天";
@@ -42,6 +42,7 @@
 /* Tests */
 "test.reactionTime.title" = "反应时间";
 "test.reactionTime.subtitle" = "屏幕变绿后立刻点击。";
+"test.reactionTime.short" = "反应";
 "test.reactionTime.tapToStart" = "点击开始";
 "test.reactionTime.instructions" = "等待屏幕变绿,然后尽快点击。提前点击会判定为犯规。";
 "test.reactionTime.wait" = "等待…";
@@ -51,11 +52,13 @@
 
 "test.stroop.title" = "Stroop 颜色测试";
 "test.stroop.subtitle" = "选择文字的颜色,而不是文字本身。";
+"test.stroop.short" = "Stroop";
 "test.stroop.instructions" = "屏幕会显示一个颜色词,但显示颜色与词义不一致。请选择你看到的颜色,而不是这个词。";
 "test.stroop.start" = "开始";
 
 "test.numberOrder.title" = "数字排序";
 "test.numberOrder.subtitle" = "按从小到大依次点击数字。";
+"test.numberOrder.short" = "数字";
 "test.numberOrder.instructions" = "数字打乱排列在网格中。请从 1 开始,按升序尽快点击。";
 "test.numberOrder.start" = "开始";
 "test.numberOrder.next" = "下一个:";
@@ -63,6 +66,7 @@
 
 "test.memoryMatch.title" = "记忆翻牌";
 "test.memoryMatch.subtitle" = "翻两张牌,找到所有相同的配对。";
+"test.memoryMatch.short" = "记忆";
 "test.memoryMatch.instructions" = "每次翻开两张牌,把所有相同图案配成对。我们会记录用时、配对成功次数和翻错的次数。";
 "test.memoryMatch.start" = "开始";
 "test.memoryMatch.matches" = "已配对";
@@ -130,6 +134,10 @@
 "theme.teal" = "实验室绿";
 "theme.indigo" = "深海蓝";
 "theme.amber" = "暖琥珀";
+"theme.rose" = "玫瑰红";
+"theme.forest" = "森林绿";
+"theme.slate" = "石板蓝";
+"theme.lavender" = "薰衣草";
 "theme.graphite" = "石墨灰";
 "settings.data" = "数据";
 "settings.export.csv" = "导出 CSV";

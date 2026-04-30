@@ -219,7 +219,7 @@ struct InsightsView: View {
 
                 Picker("test", selection: $chartTestType) {
                     ForEach(TestType.allCases) { t in
-                        Text(LocalizedStringKey(t.displayKey)).tag(t)
+                        Text(LocalizedStringKey(t.shortDisplayKey)).tag(t)
                     }
                 }
                 .pickerStyle(.segmented)
