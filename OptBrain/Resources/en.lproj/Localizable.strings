@@ -38,6 +38,8 @@
 "home.stat.streak" = "Day streak";
 "home.recent.title" = "Recent sessions";
 "home.recent.yesterday" = "Yesterday";
+"home.activity.title" = "Last 14 days";
+"home.activity.subtitle" = "Each dot is a day. Filled = you trained.";
 
 /* Tests */
 "test.reactionTime.title" = "Reaction Time";

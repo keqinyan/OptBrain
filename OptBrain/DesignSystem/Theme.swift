@@ -21,7 +21,7 @@ enum Theme {
 
 extension Font {
     static let optDashboardTitle: Font = .system(.largeTitle, design: .rounded, weight: .semibold)
-    static let optMetricValue: Font = .system(.title, design: .rounded, weight: .semibold)
+    static let optMetricValue: Font = .system(.title3, design: .rounded, weight: .semibold)
     static let optMetricLabel: Font = .system(.caption, design: .rounded, weight: .medium)
 }
 

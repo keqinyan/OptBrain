@@ -25,22 +25,31 @@ struct MetricTile: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 6) {
-                if let symbol { Image(systemName: symbol).foregroundStyle(palette.accent) }
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 5) {
+                if let symbol {
+                    Image(systemName: symbol)
+                        .font(.caption)
+                        .foregroundStyle(palette.accent)
+                }
                 Text(LocalizedStringKey(labelKey))
                     .font(.optMetricLabel)
                     .foregroundStyle(Theme.onSurfaceMuted)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
             Text(value)
                 .font(.optMetricValue)
                 .foregroundStyle(Theme.onSurface)
                 .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
         }
-        .padding(Theme.cardPadding)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Theme.surfaceElevated)
-        .clipShape(RoundedRectangle(cornerRadius: Theme.cornerRadius, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }
 
