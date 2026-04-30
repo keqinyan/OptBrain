@@ -33,31 +33,32 @@
 "home.streak.title" = "连续";
 "home.streak.subtitle" = "连续天数";
 "home.tests.title" = "快速开始";
-"home.stat.today" = "今日";
-"home.stat.week" = "本周";
+"home.stat.today" = "今日测试";
+"home.stat.week" = "本周测试";
 "home.stat.streak" = "连续天数";
 "home.recent.title" = "最近记录";
 "home.recent.yesterday" = "昨天";
-"home.activity.title" = "近 14 天";
-"home.activity.subtitle" = "每个圆点代表一天,填充表示当天有记录。";
 
 /* Tests */
 "test.reactionTime.title" = "反应时间";
 "test.reactionTime.subtitle" = "屏幕变绿后立刻点击。";
+"test.reactionTime.short" = "反应";
 "test.reactionTime.tapToStart" = "点击开始";
 "test.reactionTime.instructions" = "等待屏幕变绿,然后尽快点击。提前点击会判定为犯规。";
 "test.reactionTime.wait" = "等待…";
 "test.reactionTime.tapNow" = "点击";
-"test.reactionTime.falseStart" = "太早了 — 等屏幕变绿。";
+"test.reactionTime.falseStart" = "太早了,等屏幕变绿。";
 "test.reactionTime.missed" = "未点击";
 
 "test.stroop.title" = "Stroop 颜色测试";
 "test.stroop.subtitle" = "选择文字的颜色,而不是文字本身。";
+"test.stroop.short" = "Stroop";
 "test.stroop.instructions" = "屏幕会显示一个颜色词,但显示颜色与词义不一致。请选择你看到的颜色,而不是这个词。";
 "test.stroop.start" = "开始";
 
 "test.numberOrder.title" = "数字排序";
 "test.numberOrder.subtitle" = "按从小到大依次点击数字。";
+"test.numberOrder.short" = "数字";
 "test.numberOrder.instructions" = "数字打乱排列在网格中。请从 1 开始,按升序尽快点击。";
 "test.numberOrder.start" = "开始";
 "test.numberOrder.next" = "下一个:";
@@ -65,6 +66,7 @@
 
 "test.memoryMatch.title" = "记忆翻牌";
 "test.memoryMatch.subtitle" = "翻两张牌,找到所有相同的配对。";
+"test.memoryMatch.short" = "记忆";
 "test.memoryMatch.instructions" = "每次翻开两张牌,把所有相同图案配成对。我们会记录用时、配对成功次数和翻错的次数。";
 "test.memoryMatch.start" = "开始";
 "test.memoryMatch.matches" = "已配对";
@@ -96,7 +98,7 @@
 /* Insights */
 "insights.title" = "趋势";
 "insights.overview.title" = "整体";
-"insights.overview.note" = "每个测试单独平均 —— 不同测试之间不直接比较速度和准确率。";
+"insights.overview.note" = "每个测试单独平均,不同测试之间不直接比较速度和准确率。";
 "insights.overview.empty" = "完成一次测试,这里就会出现你的数据。";
 "insights.section.title" = "你的数据显示";
 "insights.byTOD.title" = "按时段";
@@ -105,7 +107,7 @@
 "glossary.title" = "这些指标是什么意思?";
 "glossary.speed.body" = "反应时间或完成时间的均值,单位毫秒。数值越小越快。";
 "glossary.accuracy.body" = "答对的比例。100% 表示全部正确。";
-"glossary.stability.body" = "同一次测试内反应时间的稳定程度 —— 变异系数 (标准差 ÷ 均值)。越低越稳,越高越离散。";
+"glossary.stability.body" = "同一次测试内反应时间的稳定程度,变异系数 (标准差 ÷ 均值)。越低越稳,越高越离散。";
 "insights.trend.title" = "近 7 日趋势";
 "insights.trend.preview" = "示意";
 "insights.trend.body" = "所选测试和指标在最近 7 天的每日均值。";
@@ -132,6 +134,10 @@
 "theme.teal" = "实验室绿";
 "theme.indigo" = "深海蓝";
 "theme.amber" = "暖琥珀";
+"theme.rose" = "玫瑰红";
+"theme.forest" = "森林绿";
+"theme.slate" = "石板蓝";
+"theme.lavender" = "薰衣草";
 "theme.graphite" = "石墨灰";
 "settings.data" = "数据";
 "settings.export.csv" = "导出 CSV";

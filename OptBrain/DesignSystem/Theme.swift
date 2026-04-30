@@ -31,6 +31,10 @@ enum ThemePalette: String, CaseIterable, Identifiable {
     case teal       // default — matches the AccentColor asset
     case indigo
     case amber
+    case rose
+    case forest
+    case slate
+    case lavender
     case graphite
 
     var id: String { rawValue }
@@ -40,6 +44,10 @@ enum ThemePalette: String, CaseIterable, Identifiable {
         case .teal:     return "theme.teal"
         case .indigo:   return "theme.indigo"
         case .amber:    return "theme.amber"
+        case .rose:     return "theme.rose"
+        case .forest:   return "theme.forest"
+        case .slate:    return "theme.slate"
+        case .lavender: return "theme.lavender"
         case .graphite: return "theme.graphite"
         }
     }
@@ -50,6 +58,10 @@ enum ThemePalette: String, CaseIterable, Identifiable {
         case .teal:     return ((0.165, 0.616, 0.561), (0.310, 0.741, 0.667))
         case .indigo:   return ((0.231, 0.353, 0.627), (0.435, 0.553, 0.808))
         case .amber:    return ((0.890, 0.561, 0.165), (0.965, 0.694, 0.310))
+        case .rose:     return ((0.769, 0.227, 0.318), (0.886, 0.435, 0.510))
+        case .forest:   return ((0.247, 0.416, 0.302), (0.420, 0.643, 0.475))
+        case .slate:    return ((0.290, 0.361, 0.416), (0.518, 0.604, 0.671))
+        case .lavender: return ((0.435, 0.337, 0.580), (0.624, 0.522, 0.765))
         case .graphite: return ((0.298, 0.337, 0.380), (0.580, 0.620, 0.667))
         }
     }

@@ -11,7 +11,6 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     statsBar
-                    activityStrip
                     testGrid
                     if !sessions.isEmpty {
                         recentSessionsCard
@@ -67,56 +66,6 @@ struct HomeView: View {
 
     private var divider: some View {
         Rectangle().fill(Theme.divider).frame(width: 1, height: 28)
-    }
-
-    // MARK: - 14-day activity strip
-
-    private var activityStrip: some View {
-        let cal = Calendar.current
-        let today = cal.startOfDay(for: .now)
-        let days: [Date] = (0..<14).map { offset in
-            cal.date(byAdding: .day, value: -(13 - offset), to: today) ?? today
-        }
-        let activeDays: Set<Date> = Set(sessions.map { cal.startOfDay(for: $0.startTime) })
-        return HStack(spacing: 8) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("home.activity.title")
-                    .font(.caption2.weight(.medium))
-                    .foregroundStyle(Theme.onSurfaceMuted)
-                    .textCase(.uppercase)
-                    .tracking(0.5)
-                Text("home.activity.subtitle")
-                    .font(.caption)
-                    .foregroundStyle(Theme.onSurface)
-            }
-            Spacer(minLength: 8)
-            HStack(spacing: 4) {
-                ForEach(days, id: \.self) { day in
-                    activityDot(day: day, active: activeDays.contains(day),
-                                isToday: cal.isDateInToday(day))
-                }
-            }
-        }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 12)
-        .background(Theme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: Theme.cornerRadius, style: .continuous))
-    }
-
-    @ViewBuilder
-    private func activityDot(day: Date, active: Bool, isToday: Bool) -> some View {
-        let size: CGFloat = 10
-        ZStack {
-            Circle()
-                .fill(active ? palette.accent : Theme.divider.opacity(0.4))
-                .frame(width: size, height: size)
-            if isToday {
-                Circle()
-                    .stroke(palette.accent, lineWidth: 1.5)
-                    .frame(width: size + 6, height: size + 6)
-            }
-        }
-        .frame(width: size + 6, height: size + 6)
     }
 
     // MARK: - Test grid (2x2)
