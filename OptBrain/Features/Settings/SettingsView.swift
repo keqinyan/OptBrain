@@ -155,10 +155,9 @@ private struct ThemePickerRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            // Flexible wrap so 8 swatches lay out cleanly on any width.
+            // 5 fixed columns × 2 rows = 10 swatches, consistent on every width.
             LazyVGrid(
-                columns: [GridItem(.adaptive(minimum: 48), spacing: 12)],
-                alignment: .leading,
+                columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 5),
                 spacing: 12
             ) {
                 ForEach(ThemePalette.allCases) { palette in
