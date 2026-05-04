@@ -152,6 +152,8 @@
 "settings.wipe.confirm.title" = "Delete everything?";
 "settings.wipe.confirm.body" = "This permanently removes every session and trial stored on this device.";
 "settings.wipe.confirm.action" = "Delete";
+"settings.community" = "Community";
+"settings.community.discord" = "Join Community on Discord";
 "settings.privacy" = "Privacy";
 "settings.privacy.body" = "Sessions are stored locally on your device. We never transmit data anywhere unless you export it yourself.";
 "settings.about" = "About";
