@@ -152,6 +152,8 @@
 "settings.wipe.confirm.title" = "确认全部删除?";
 "settings.wipe.confirm.body" = "此操作将永久移除本机存储的所有测试与试次数据。";
 "settings.wipe.confirm.action" = "删除";
+"settings.community" = "社区";
+"settings.community.discord" = "加入 Discord 社区";
 "settings.privacy" = "隐私";
 "settings.privacy.body" = "数据仅保存在本机。除非你主动导出,否则不会上传到任何地方。";
 "settings.about" = "关于";

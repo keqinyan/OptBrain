@@ -55,6 +55,17 @@ struct SettingsView: View {
                     }
                 }
 
+                Section("settings.community") {
+                    Link(destination: URL(string: "https://discord.gg/XS3kv6YFe9")!) {
+                        HStack {
+                            Text("settings.community.discord")
+                            Spacer()
+                            Image(systemName: "arrow.up.forward.square")
+                                .foregroundStyle(Theme.onSurfaceMuted)
+                        }
+                    }
+                }
+
                 Section("settings.privacy") {
                     Text("settings.privacy.body")
                         .font(.callout)
